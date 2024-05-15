@@ -64,7 +64,7 @@ def put_filters_working(data_):
 
     
     linkedin_url = "https://www.linkedin.com/in/akashpal12/"
-    st.sidebar.write("Made with:heart:,:green[*Akash Pal*]")
+    st.sidebar.write("Made with:heart: :green[*Akash Pal*]")
     # st.sidebar.text("")
     st.sidebar.write("[LinkedIn](%s)" % linkedin_url)
     st.sidebar.write("[Github](%s)" % "https://github.com/farzigulzar/Nigeria-Agriculture")
