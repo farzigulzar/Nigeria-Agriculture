@@ -178,9 +178,10 @@ if __name__=="__main__":
         # st.text("")
         expander_ = st.expander("Insights")
         expander_.write('''
-                            * 
-                            * ads
-                            * asd     
+                            * April-May in general observes less export, might be because of the heat and crop season
+                            * Similar dipping trends have been observed around September as crops season
+                            * The highest exports are generally seen in Quarter 4
+                            * Post Pandemic recovery is still yet to be observed, as the total export in 2023 is still less than 2021. However it still better than 2022.
                     ''')
         query_ts = create_query(dicti_query, data_)
         # data_[query_ts]
@@ -238,7 +239,7 @@ if __name__=="__main__":
         # Line chart for all dates
         t1_['Date']=pd.to_datetime(list(t1_.index), format = "%d/%m/%Y")
         # t1_['m']
-        fig=px.bar(t1_,x='Date', y='Units Sold' )
+        fig=px.line(t1_,x='Date', y='Units Sold' )
         fig.update_layout(width=1000, title="Units Sold")
         st.plotly_chart(fig)
 
@@ -251,13 +252,19 @@ if __name__=="__main__":
         st.plotly_chart(fig)
     
     with tab3:
+        expander_ = st.expander("Insights")
+        expander_.write(
+        '''
+        * A linear Negative trend is observed with Sesame, Cashew, Plantain.
+        * However rest all products have positive trend.
+        ''')
         # What is the cost of goods sold (COGS) as a percentage of revenue?
         query_ts = create_query(dicti_query, data_)
 
         data_['COGS']=data_['Units Sold']*data_['unit_price']
         data_['COGS percentage revenue']=data_['Units Sold']*data_['unit_price']/data_['Profit']
 
-        fig = px.scatter( data_[query_ts], x='COGS', y='Profit', opacity=0.65,
+        fig = px.scatter( data_[query_ts], x='Units Sold', y='Profit', opacity=0.65,
                     trendline='ols', trendline_color_override='white', size = 'COGS percentage revenue', color='Product Name'
                 )
         fig.update_layout(title="Correlation between Units sold and Profit generated", width=1100)
