@@ -33,7 +33,7 @@ def read_data(data_path):
 def put_filters_working(data_):
     query=data_[data_.columns[0]]==data_[data_.columns[0]]
     
-    st.sidebar.header("Custom Selection")
+    st.sidebar.header("Selection")
     s_= list(pd.unique(data_['Company']))
     s_=["ALL"]+s_
     company = st.sidebar.selectbox(label="Company ",
@@ -61,6 +61,13 @@ def put_filters_working(data_):
     if (Destination_p!='ALL'):
         query&=(data_['Destination Port']==Destination_p)
     st.sidebar.image("https://ocdn.eu/images/pulscms/NmI7MDA_/19b04a0e578936d3c3ce0c984d632fd7.jpg")
+
+    
+    linkedin_url = "https://www.linkedin.com/in/akashpal12/"
+    st.sidebar.write("Made with:heart:,:green[*Akash Pal*]")
+    # st.sidebar.text("")
+    st.sidebar.write("[LinkedIn](%s)" % linkedin_url)
+    st.sidebar.write("[Github](%s)" % "https://github.com/farzigulzar/Nigeria-Agriculture")
     return company, prod_, Export_c, Destination_p
 
 # # What are the top-selling products?
@@ -105,7 +112,7 @@ if __name__=="__main__":
                             * Denmark and Italy are one of the largest Importing countries
                         ''')
 
-            
+            h=300   
             # What are the top-selling products?
             c1, c2 = st.columns(2)
             dict_q_ = dicti_query
@@ -116,7 +123,7 @@ if __name__=="__main__":
             
             fig_tsp = px.bar(w_, x="Units Sold", y="Product Name",
                             hover_data='Profit', orientation='h')
-            fig_tsp.update_layout(title="Top Selling Products", width=500)
+            fig_tsp.update_layout(title="Top Selling Products", width=500, height=h)
             c1.plotly_chart(fig_tsp, theme="streamlit")
             # c2.text("Raw Values")
             # c2.dataframe(w_)
@@ -127,7 +134,7 @@ if __name__=="__main__":
                     export:"Export Country", destination:"Destination Port"}
             tsp_query = create_query(dict_q_, data_)
             fig = px.bar(data_[tsp_query], x="Export Country", y="Product Name", color="Product Name")
-            fig.update_layout(title="Product Sales", width=580)
+            fig.update_layout(title="Product Sales", width=580, height=h)
             c2.plotly_chart(fig)
 
 
@@ -142,7 +149,7 @@ if __name__=="__main__":
             
             fig_tsp = px.bar(w_, x="Profit", y="Company",
                             hover_data='Units Sold', orientation='h')
-            fig_tsp.update_layout(title="Highest Sales revenues", width=500)
+            fig_tsp.update_layout(title="Highest Sales revenues", width=500, height=h)
             c1.plotly_chart(fig_tsp, theme="streamlit")
             
 
@@ -159,7 +166,7 @@ if __name__=="__main__":
                 fig.add_trace(go.Bar(x= t_['Export Country'], y=t_[t_.columns[i]], name=  t_.columns[i]))
             
             fig.update_layout(barmode='stack' , xaxis={'categoryorder':'category ascending'},
-                            title = "Average revenue per Country", yaxis={'title':'Avg Revenue'}, width=580   )
+                            title = "Average revenue per Country", yaxis={'title':'Avg Revenue'}, width=580 , height=h  )
             c2.plotly_chart(fig)
 
 
