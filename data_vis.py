@@ -60,7 +60,7 @@ def put_filters_working(data_):
     Destination_p = st.sidebar.selectbox("Destination Port", s_)
     if (Destination_p!='ALL'):
         query&=(data_['Destination Port']==Destination_p)
-    
+    st.sidebar.image("https://ocdn.eu/images/pulscms/NmI7MDA_/19b04a0e578936d3c3ce0c984d632fd7.jpg")
     return company, prod_, Export_c, Destination_p
 
 # # What are the top-selling products?
@@ -96,6 +96,15 @@ if __name__=="__main__":
     # data_[q_]
 
     with tab1:
+            expander_ = st.expander("Insights")
+            expander_.write('''
+                            * It has been observed that Sesame is the top selling product followed by Cocoa with a very small margin\n
+                            * The highest sale revenue was accumulated by Nigeria Auro Export Company, however there are product specfic companies 
+                                as well like Farmgate
+                                which deals in Rubber
+                            * Denmark and Italy are one of the largest Importing countries
+                        ''')
+
             
             # What are the top-selling products?
             c1, c2 = st.columns(2)
@@ -138,8 +147,11 @@ if __name__=="__main__":
             
 
             # average revenue per country
+            # dicti_query = {company:'Company', product:"Product Name", destination:"Destination Port"}
+            
             val_ = 'Profit per unit'
             # st.dataframe(data_[tsp_query])
+            # data_[create_query(dicti_query, data_)]
             t_ = data_.groupby(['Export Country', 'Product Name']).agg({val_:'mean'}).reset_index().pivot(index='Export Country', columns='Product Name', values=val_).reset_index()
 
             fig = go.Figure(go.Bar(x= t_['Export Country'], y=t_[t_.columns[1]], name=  t_.columns[1]))
@@ -164,6 +176,12 @@ if __name__=="__main__":
     
     with tab2:
         # st.text("")
+        expander_ = st.expander("Insights")
+        expander_.write('''
+                            * 
+                            * ads
+                            * asd     
+                    ''')
         query_ts = create_query(dicti_query, data_)
         # data_[query_ts]
         t1_ = data_[query_ts][['Date', 'Units Sold']].groupby(['Date']).agg({"Units Sold":"sum"})
