@@ -84,7 +84,7 @@ def create_query(dict,data_):
 
 if __name__=="__main__": 
     st.set_page_config(layout="wide")
-    data_ = read_data("NG agric exports\\nigeria_agricultural_exports.csv")
+    data_ = read_data("https://raw.githubusercontent.com/farzigulzar/Nigeria-Agriculture/main/NG%20agric%20exports/nigeria_agricultural_exports.csv")
     st.title("Nigeria Agriculture Report")
 
     tab1, tab2, tab3, tab4 = st.tabs(["Sales Performance", "Time Series", "Cost Analysis", "Geographic Data"])
